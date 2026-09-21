@@ -10,6 +10,7 @@ body {
 /* Level 1 */
 .kartu-flex {
   display: flex;
+  justify-content: space-between;
 }
 
 .kartu {
