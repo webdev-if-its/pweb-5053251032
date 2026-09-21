@@ -63,6 +63,9 @@ body {
 /* Level 7 */
 
 /* Level 8 */
+.unggulan {
+  grid-column: span 2;
+}
 
 /* Level 9
 
