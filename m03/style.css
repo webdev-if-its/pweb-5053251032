@@ -26,16 +26,19 @@ body {
 
 /* Level 4 */
 .tata-letak {
+  display: flex;
 }
 
 .sidebar {
   background-color: #f0f0f0;
   padding: 1rem;
+  flex: 0 0 250px;
 }
 
 .konten {
   background-color: #ffffff;
   padding: 1rem;
+  flex: 1;
 }
 
 /* Level 5 */
