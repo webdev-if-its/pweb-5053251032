@@ -1,0 +1,221 @@
+:root {
+  --color-ink: #1e1b3a;
+  --color-accent: #f5b400;
+  --color-bg-soft: #f4f2fb;
+  --color-border: #e4e1f2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: var(--color-ink);
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.5rem 3rem;
+}
+
+.logo {
+  height: 2.5rem;
+}
+
+.main-nav {
+  margin-left: auto;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  color: var(--color-ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  color: var(--color-accent);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: var(--color-bg-soft);
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-weight: 700;
+  border: 0.125rem solid transparent;
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.btn-yellow {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.btn-yellow:hover,
+.btn-yellow:focus-visible {
+  background: var(--color-ink);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--color-bg-soft);
+  color: var(--color-ink);
+  border-color: var(--color-border);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  border-color: var(--color-ink);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem 3rem 4rem;
+}
+
+.hero-text {
+  flex: 1 1 25rem;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin: 0 0 1.5rem;
+}
+
+.hero-text p {
+  font-size: 1.125rem;
+  color: #555;
+  max-width: 32rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.social-proof {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #555;
+}
+
+.avatars {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.avatar {
+  width: 2.75rem;
+  height: 2.75rem;
+  background: var(--color-bg-soft);
+  border: 0.125rem solid white;
+  border-radius: 50%;
+}
+
+.avatar-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-ink);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.hero-gallery {
+  flex: 1 1 30rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.gallery-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.hero-photo {
+  width: 100%;
+}
+
+/* ---------- Discover section ---------- */
+
+.discover {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem 3rem 5rem;
+}
+
+.discover-photo {
+  flex: 1 1 25rem;
+  width: 100%;
+}
+
+.discover h2 {
+  flex: 1 1 25rem;
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 45rem) {
+  .site-header,
+  .hero,
+  .discover {
+    flex-wrap: wrap;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
