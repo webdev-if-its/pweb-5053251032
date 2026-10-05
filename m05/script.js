@@ -75,6 +75,14 @@ export function buatKartuBuku(buku) {
 export function render(data) {
   const wadah = document.querySelector('#katalog');
   document.querySelector('#ringkasan').textContent = `${data.length} buku ditemukan`;
+
+  if (data.length === 0) {
+    const pesan = document.createElement('p');
+    pesan.textContent = 'Tidak ada buku yang cocok.';
+    wadah.replaceChildren(pesan);
+    return;
+  }
+
   const kartuList = data.map((buku) => {
     const kartu = buatKartuBuku(buku);
     kartu.addEventListener('click', () => tampilkanDetail(buku));
