@@ -75,13 +75,18 @@ export function buatKartuBuku(buku) {
 export function render(data) {
   const wadah = document.querySelector('#katalog');
   document.querySelector('#ringkasan').textContent = `${data.length} buku ditemukan`;
-  wadah.replaceChildren(...data.map((buku) => buatKartuBuku(buku)));
+  const kartuList = data.map((buku) => {
+    const kartu = buatKartuBuku(buku);
+    kartu.addEventListener('click', () => tampilkanDetail(buku));
+    return kartu;
+  });
+  wadah.replaceChildren(...kartuList);
 }
 
 // Level 7 — dipanggil saat sebuah kartu diklik. TODO: tampilkan judul,
 // penulis, dan harga buku itu di #panel-detail (textContent, bukan innerHTML).
 function tampilkanDetail(buku) {
-  // tulis di sini
+  document.querySelector('#panel-detail').replaceChildren(buatKartuBuku(buku));
 }
 
 // Level 8 & 9 — TODO: pasang event listener 'submit' pada #form-cari.
