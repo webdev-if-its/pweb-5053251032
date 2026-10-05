@@ -97,6 +97,8 @@ function tampilkanDetail(buku) {
 export function pasangFormCari() {
   document.querySelector('#form-cari').addEventListener('submit', (event) => {
     event.preventDefault();
+    const kata = document.querySelector('#input-cari').value.toLowerCase();
+    render(katalog.filter((buku) => buku.judul.toLowerCase().includes(kata)));
   });
 }
 
