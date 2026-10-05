@@ -73,7 +73,9 @@ export function buatKartuBuku(buku) {
 //   "Tidak ada buku yang cocok." — jangan biarkan #katalog kosong melompong.
 // - Setiap kartu yang ditampilkan harus bisa diklik (lihat Level 7).
 export function render(data) {
-  // tulis di sini
+  const wadah = document.querySelector('#katalog');
+  document.querySelector('#ringkasan').textContent = `${data.length} buku ditemukan`;
+  wadah.replaceChildren(...data.map((buku) => buatKartuBuku(buku)));
 }
 
 // Level 7 — dipanggil saat sebuah kartu diklik. TODO: tampilkan judul,
