@@ -24,7 +24,7 @@ export function formatRupiah(angka) {
 // Level 2 — TODO: kembalikan buku yang `tersedia` saja, TANPA mengubah
 // array `daftar` yang asli (jangan pakai .sort/.splice/push ke `daftar`).
 export function saringTersedia(daftar) {
-  return daftar;
+  return daftar.filter((buku) => buku.tersedia);
 }
 
 // Level 3 — TODO: ambil elemen #judul-pengumuman dengan querySelector,
