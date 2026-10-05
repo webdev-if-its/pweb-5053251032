@@ -53,7 +53,15 @@ export function tandaiPengumumanPenting() {
 // Struktur minimal: <article><h3>judul</h3><p>penulis</p><p>harga</p></article>
 // Kembalikan elemen itu (jangan langsung ditempel ke halaman di sini).
 export function buatKartuBuku(buku) {
-  return null;
+  const kartu = document.createElement('article');
+  const judul = document.createElement('h3');
+  judul.textContent = buku.judul;
+  const penulis = document.createElement('p');
+  penulis.textContent = buku.penulis;
+  const harga = document.createElement('p');
+  harga.textContent = formatRupiah(buku.harga);
+  kartu.append(judul, penulis, harga);
+  return kartu;
 }
 
 // Level 6 & 10 — TODO: kosongkan #katalog, lalu render ulang dari `data`.
