@@ -39,7 +39,12 @@ export function sorotJudulPengumuman() {
 // (tanpa peduli huruf besar/kecil), tambahkan prefix "⚠ " di depan teksnya.
 // Jangan tambahkan prefix dua kali kalau fungsi ini terpanggil berulang.
 export function tandaiPengumumanPenting() {
-  // tulis di sini
+  const daftarLi = document.querySelectorAll('#daftar-pengumuman li');
+  for (const li of daftarLi) {
+    const teks = li.textContent;
+    if (!teks.toLowerCase().includes('tutup') || teks.startsWith('⚠ ')) continue;
+    li.textContent = '⚠ ' + teks;
+  }
 }
 
 // Level 5 — TODO: buat SATU elemen <article> untuk satu buku, memakai
