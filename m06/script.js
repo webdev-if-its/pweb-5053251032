@@ -102,12 +102,12 @@ function buatKartuBuku(buku) {
 export function render(state) {
   const wadahKatalog = document.querySelector('#katalog');
   wadahKatalog.textContent = '';
-  for (const buku of katalogBawaan) {
+  for (const buku of state.katalog) {
     wadahKatalog.append(buatKartuBuku(buku));
   }
 
   const ringkasan = document.querySelector('#ringkasan');
-  ringkasan.textContent = `${katalogBawaan.length} buku ditemukan`;
+  ringkasan.textContent = `${state.katalog.length} buku ditemukan`;
 
   // Level 9 — TODO: render juga #daftar-bacaan dari state.daftarBacaan.
   // Kalau kosong, tampilkan pesan yang jelas (misalnya "Belum ada buku di
