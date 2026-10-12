@@ -115,6 +115,12 @@ export function render(state) {
   // melompong tanpa penjelasan apa pun.
   const daftarBacaan = document.querySelector('#daftar-bacaan');
   daftarBacaan.textContent = '';
+  if (state.daftarBacaan.length === 0) {
+    const kosong = document.createElement('li');
+    kosong.textContent = 'Belum ada buku di daftar bacaan.';
+    daftarBacaan.append(kosong);
+    return;
+  }
   for (const buku of state.daftarBacaan) {
     const item = document.createElement('li');
     item.textContent = `${buku.judul} — ${buku.penulis}`;
