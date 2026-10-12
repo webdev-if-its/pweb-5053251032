@@ -133,6 +133,8 @@ export function render(state) {
 // - Level 5 — panggil render(state) di akhir, supaya tampilan langsung
 //   berubah tanpa kode lain perlu memanggilnya lagi.
 export function tambahKeBacaan(buku) {
+  if (!buku.judul) return;
+  if (state.daftarBacaan.some((item) => item.judul === buku.judul)) return;
   state.daftarBacaan.push(buku);
   localStorage.setItem(KUNCI_PENYIMPANAN, JSON.stringify(state.daftarBacaan));
   render(state);
