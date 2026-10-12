@@ -134,6 +134,7 @@ export function render(state) {
 //   berubah tanpa kode lain perlu memanggilnya lagi.
 export function tambahKeBacaan(buku) {
   state.daftarBacaan.push(buku);
+  localStorage.setItem(KUNCI_PENYIMPANAN, JSON.stringify(state.daftarBacaan));
   render(state);
 }
 
