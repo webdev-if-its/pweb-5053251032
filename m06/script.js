@@ -137,7 +137,15 @@ export function tambahKeBacaan(buku) {
 // Ambil data buku dari dataset tombol (judul, penulis, harga), lalu panggil
 // tambahKeBacaan(...).
 export function pasangDelegasiKatalog() {
-  // tulis di sini
+  document.querySelector('#katalog').addEventListener('click', (event) => {
+    const tombol = event.target.closest('[data-aksi="tambah-bacaan"]');
+    if (!tombol) return;
+    tambahKeBacaan({
+      judul: tombol.dataset.judul,
+      penulis: tombol.dataset.penulis,
+      harga: Number(tombol.dataset.harga),
+    });
+  });
 }
 
 // Level 7 — BUG: baris ini crash kalau isi localStorage bukan JSON yang
