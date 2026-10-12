@@ -162,8 +162,12 @@ export function pasangDelegasiKatalog() {
 // Bungkus dengan try/catch, dan kalau gagal atau hasilnya bukan array,
 // kembalikan array kosong saja — jangan biarkan aplikasi crash.
 export function muatDaftarBacaan() {
-  const tersimpan = localStorage.getItem(KUNCI_PENYIMPANAN);
-  return JSON.parse(tersimpan);
+  try {
+    const hasil = JSON.parse(localStorage.getItem(KUNCI_PENYIMPANAN));
+    return Array.isArray(hasil) ? hasil : [];
+  } catch {
+    return [];
+  }
 }
 
 // -------------------------------------------------------------- BOOTSTRAP
