@@ -54,7 +54,16 @@ export function pasangAksiCepat() {
 export const hitungKlik = { luar: 0, dalam: 0 };
 
 export function pasangBuktiBubbling() {
-  // tulis di sini
+  document.querySelector('#area-bubbling').addEventListener('click', () => {
+    hitungKlik.luar++;
+  });
+  document.querySelector('#tombol-tanpa-stop').addEventListener('click', () => {
+    hitungKlik.dalam++;
+  });
+  document.querySelector('#tombol-stop').addEventListener('click', (event) => {
+    hitungKlik.dalam++;
+    event.stopPropagation();
+  });
 }
 
 // --------------------------------------------------------- KATALOG & KARTU
