@@ -113,6 +113,13 @@ export function render(state) {
   // Kalau kosong, tampilkan pesan yang jelas (misalnya "Belum ada buku di
   // daftar bacaan.") di dalam #daftar-bacaan — jangan biarkan <ul> kosong
   // melompong tanpa penjelasan apa pun.
+  const daftarBacaan = document.querySelector('#daftar-bacaan');
+  daftarBacaan.textContent = '';
+  for (const buku of state.daftarBacaan) {
+    const item = document.createElement('li');
+    item.textContent = `${buku.judul} — ${buku.penulis}`;
+    daftarBacaan.append(item);
+  }
 }
 
 // ------------------------------------------------------------ DAFTAR BACAAN
@@ -126,7 +133,8 @@ export function render(state) {
 // - Level 5 — panggil render(state) di akhir, supaya tampilan langsung
 //   berubah tanpa kode lain perlu memanggilnya lagi.
 export function tambahKeBacaan(buku) {
-  // tulis di sini
+  state.daftarBacaan.push(buku);
+  render(state);
 }
 
 // Level 4 — TODO: pasang SATU listener klik pada #katalog (bukan pada
