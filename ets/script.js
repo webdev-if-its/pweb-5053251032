@@ -1,10 +1,7 @@
-// ETS Pemrograman Web — Personal Money Management, persona: Pekerja lepas (freelancer)
-
 const KUNCI_TRANSAKSI = 'ets-keuangan:transaksi';
 const KUNCI_TAGIHAN = 'ets-keuangan:tagihan';
 const KATEGORI = ['Proyek', 'Makan', 'Transport', 'Peralatan', 'Lainnya'];
 
-// Satu objek untuk seluruh data aplikasi; semua fungsi membaca dan menulis lewat sini.
 const state = {
   transaksi: [],
   tagihan: [],
@@ -21,7 +18,18 @@ function formatRupiah(angka) {
   return 'Rp ' + angka.toLocaleString('id-ID');
 }
 
-// ---------------------------------------------------------------- DATA
+function ambilAngka(teks) {
+  let digit = '';
+  for (const huruf of teks) {
+    if (huruf >= '0' && huruf <= '9') digit += huruf;
+  }
+  return Number(digit);
+}
+
+function formatInputUang(event) {
+  const angka = ambilAngka(event.target.value);
+  event.target.value = angka > 0 ? formatRupiah(angka) : '';
+}
 
 function muatData(kunci) {
   try {
@@ -37,7 +45,6 @@ function simpanData() {
   localStorage.setItem(KUNCI_TAGIHAN, JSON.stringify(state.tagihan));
 }
 
-// id unik lintas transaksi dan tagihan: satu lebih besar dari id terbesar yang ada.
 function buatId() {
   let terbesar = 0;
   for (const item of [...state.transaksi, ...state.tagihan]) {
@@ -80,13 +87,10 @@ function saringTransaksi() {
   );
 }
 
-// Tanggal terbaru dulu; kalau tanggal sama, yang dicatat belakangan (id lebih besar) di atas.
 function bandingkanTerbaru(a, b) {
   if (a.tanggal === b.tanggal) return b.id - a.id;
   return a.tanggal < b.tanggal ? 1 : -1;
 }
-
-// ----------------------------------------------------------- VALIDASI
 
 function validasiTransaksi(data) {
   if (!data.tanggal) return 'Tanggal wajib diisi.';
@@ -102,8 +106,6 @@ function validasiTagihan(data) {
 function tampilkanError(selector, pesan) {
   elemen(selector).textContent = pesan;
 }
-
-// ------------------------------------------------------------- RENDER
 
 function buatTombol(teks, aksi, id) {
   const tombol = document.createElement('button');
@@ -204,14 +206,12 @@ function render() {
   renderForm();
 }
 
-// -------------------------------------------------------------- AKSI
-
 function ambilDataTransaksi() {
   return {
     tanggal: elemen('#input-tanggal').value,
     jenis: elemen('#input-jenis').value,
     kategori: elemen('#input-kategori').value,
-    nominal: Number(elemen('#input-nominal').value),
+    nominal: ambilAngka(elemen('#input-nominal').value),
     catatan: elemen('#input-catatan').value,
   };
 }
@@ -220,7 +220,7 @@ function isiFormTransaksi(transaksi) {
   elemen('#input-tanggal').value = transaksi.tanggal;
   elemen('#input-jenis').value = transaksi.jenis;
   elemen('#input-kategori').value = transaksi.kategori;
-  elemen('#input-nominal').value = transaksi.nominal;
+  elemen('#input-nominal').value = formatRupiah(transaksi.nominal);
   elemen('#input-catatan').value = transaksi.catatan;
 }
 
@@ -288,7 +288,7 @@ function simpanTagihan(event) {
   const data = {
     tanggal: elemen('#tagihan-tanggal').value,
     klien: elemen('#tagihan-klien').value,
-    nominal: Number(elemen('#tagihan-nominal').value),
+    nominal: ambilAngka(elemen('#tagihan-nominal').value),
   };
   const pesan = validasiTagihan(data);
   tampilkanError('#error-tagihan', pesan);
@@ -302,7 +302,6 @@ function simpanTagihan(event) {
   render();
 }
 
-// Tagihan lunas otomatis menjadi transaksi pemasukan di daftar yang sama.
 function tandaiLunas(id) {
   const tagihan = cariById(state.tagihan, id);
   if (!tagihan || tagihan.status === 'lunas') return;
@@ -330,8 +329,6 @@ function ubahFilter(event) {
   render();
 }
 
-// ------------------------------------------------------------ BOOTSTRAP
-
 function isiPilihanKategori() {
   for (const selector of ['#input-kategori', '#filter-kategori']) {
     for (const kategori of KATEGORI) {
@@ -350,6 +347,9 @@ function pasangListener() {
   elemen('#form-tagihan').addEventListener('submit', simpanTagihan);
   elemen('#daftar-tagihan').addEventListener('click', tanganiAksiTagihan);
   elemen('#filter').addEventListener('input', ubahFilter);
+  for (const isian of document.querySelectorAll('.uang')) {
+    isian.addEventListener('input', formatInputUang);
+  }
 }
 
 state.transaksi = muatData(KUNCI_TRANSAKSI);
