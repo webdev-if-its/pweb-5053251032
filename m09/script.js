@@ -43,7 +43,11 @@ export function ambilBuku(kataKunci) {
   const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(kataKunci)}&limit=5`;
   return fetch(url)
     .then((res) => res.json())
-    .then((json) => json.docs);
+    .then((json) => json.docs.map((doc) => ({
+      judul: doc.title,
+      penulis: doc.author_name?.[0] ?? 'Tidak diketahui',
+      tahun: doc.first_publish_year,
+    })));
 }
 
 // -------------------------------------------------------------- RENDER
