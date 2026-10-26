@@ -98,7 +98,9 @@ let permintaanTerakhir = 0;
 //   hasilnya (baik sukses maupun gagal), periksa apakah nomor itu masih
 //   yang paling baru.
 export async function cariDanRender(kataKunci) {
-  // tulis di sini
+  const status = document.querySelector('#status-pencarian');
+  status.textContent = 'Memuat...';
+  await ambilBuku(kataKunci);
 }
 
 // ------------------------------------------------------------- LEVEL 8–9
