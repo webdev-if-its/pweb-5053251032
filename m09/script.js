@@ -100,8 +100,13 @@ let permintaanTerakhir = 0;
 export async function cariDanRender(kataKunci) {
   const status = document.querySelector('#status-pencarian');
   status.textContent = 'Memuat...';
-  const data = await ambilBuku(kataKunci);
-  render(data);
+  try {
+    const data = await ambilBuku(kataKunci);
+    status.textContent = data.length === 0 ? 'Tidak ada buku ditemukan.' : '';
+    render(data);
+  } catch {
+    status.textContent = 'Gagal memuat data. Coba lagi.';
+  }
 }
 
 // ------------------------------------------------------------- LEVEL 8–9
