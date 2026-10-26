@@ -42,6 +42,9 @@ export async function urutanEksekusi() {
 export async function ambilBuku(kataKunci) {
   const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(kataKunci)}&limit=5`;
   const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Permintaan gagal: ${response.status}`);
+  }
   const json = await response.json();
   return json.docs.map((doc) => ({
     judul: doc.title,
