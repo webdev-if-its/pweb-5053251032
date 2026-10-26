@@ -98,13 +98,16 @@ let permintaanTerakhir = 0;
 //   hasilnya (baik sukses maupun gagal), periksa apakah nomor itu masih
 //   yang paling baru.
 export async function cariDanRender(kataKunci) {
+  const nomorPermintaan = ++permintaanTerakhir;
   const status = document.querySelector('#status-pencarian');
   status.textContent = 'Memuat...';
   try {
     const data = await ambilBuku(kataKunci);
+    if (nomorPermintaan !== permintaanTerakhir) return;
     status.textContent = data.length === 0 ? 'Tidak ada buku ditemukan.' : '';
     render(data);
   } catch {
+    if (nomorPermintaan !== permintaanTerakhir) return;
     status.textContent = 'Gagal memuat data. Coba lagi.';
   }
 }
