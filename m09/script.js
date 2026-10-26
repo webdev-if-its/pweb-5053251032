@@ -118,7 +118,11 @@ export async function cariDanRender(kataKunci) {
 //   JEDA_DEBOUNCE, baru cari.
 export function pasangPencarianOnline() {
   const input = document.querySelector('#input-cari-online');
-  input.addEventListener('input', () => cariDanRender(input.value));
+  let timer;
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => cariDanRender(input.value), JEDA_DEBOUNCE);
+  });
 }
 
 // -------------------------------------------------------------- BOOTSTRAP
