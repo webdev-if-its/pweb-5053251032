@@ -22,7 +22,13 @@ async function cacheFirst(request) {
 // dari cache. Kalau di cache juga tidak ada, biarkan error itu terus
 // menyebar (jangan ditangkap diam-diam dengan mengembalikan undefined).
 async function networkFirst(request) {
-  return fetch(request);
+  try {
+    return await fetch(request);
+  } catch (error) {
+    const tersimpan = await caches.match(request);
+    if (tersimpan) return tersimpan;
+    throw error;
+  }
 }
 
 // Level 3 — TODO: daftarkan listener 'install' lewat
