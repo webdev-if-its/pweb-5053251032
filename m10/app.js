@@ -6,3 +6,6 @@
 // Level 2 — TODO: daftarkan service worker (sw.js) di sini, dibungkus
 // pengecekan `if ('serviceWorker' in navigator)` supaya tidak error di
 // browser lama yang belum mendukung service worker.
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
