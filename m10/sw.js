@@ -59,4 +59,7 @@ self.addEventListener('activate', () => {});
 // (request.mode === 'navigate') yang gagal total (networkFirst
 // menolak/reject), kembalikan caches.match('/offline.html') sebagai
 // cadangan, alih-alih membiarkan halamannya gagal dimuat.
-self.addEventListener('fetch', () => {});
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  event.respondWith(adalahAsetStatis(request) ? cacheFirst(request) : networkFirst(request));
+});
