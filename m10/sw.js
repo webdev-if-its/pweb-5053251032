@@ -14,7 +14,7 @@ function adalahAsetStatis(request) {
 // Level 5 — TODO: coba ambil dari cache dulu (caches.match). Kalau ada,
 // kembalikan itu. Kalau tidak ada, baru fetch() ke jaringan.
 async function cacheFirst(request) {
-  return fetch(request);
+  return (await caches.match(request)) || fetch(request);
 }
 
 // Level 6 — TODO: coba fetch() ke jaringan dulu. Kalau berhasil,
