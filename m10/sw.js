@@ -47,7 +47,13 @@ self.addEventListener('install', (event) => {
 // Pakai caches.keys() untuk melihat semua nama cache yang ada, lalu
 // caches.delete(nama) untuk yang sudah usang. Jangan hapus NAMA_CACHE
 // yang sedang dipakai.
-self.addEventListener('activate', () => {});
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((nama) =>
+      Promise.all(nama.filter((n) => n !== NAMA_CACHE).map((n) => caches.delete(n)))
+    )
+  );
+});
 
 // Level 3 — TODO: daftarkan listener 'fetch'.
 //
