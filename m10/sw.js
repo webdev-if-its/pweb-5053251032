@@ -61,5 +61,10 @@ self.addEventListener('activate', () => {});
 // cadangan, alih-alih membiarkan halamannya gagal dimuat.
 self.addEventListener('fetch', (event) => {
   const { request } = event;
-  event.respondWith(adalahAsetStatis(request) ? cacheFirst(request) : networkFirst(request));
+  event.respondWith(
+    (adalahAsetStatis(request) ? cacheFirst(request) : networkFirst(request)).catch((error) => {
+      if (request.mode === 'navigate') return caches.match('/offline.html');
+      throw error;
+    })
+  );
 });
