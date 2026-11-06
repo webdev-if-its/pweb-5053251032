@@ -30,6 +30,7 @@ async function networkFirst(request) {
 //
 // Level 4 — di dalam listener itu: pakai event.waitUntil(...) untuk
 // membuka cache bernama NAMA_CACHE (caches.open), lalu addAll(ASET_UTAMA).
+self.addEventListener('install', () => {});
 
 // Level 3 — TODO: daftarkan listener 'activate'.
 //
@@ -38,6 +39,7 @@ async function networkFirst(request) {
 // Pakai caches.keys() untuk melihat semua nama cache yang ada, lalu
 // caches.delete(nama) untuk yang sudah usang. Jangan hapus NAMA_CACHE
 // yang sedang dipakai.
+self.addEventListener('activate', () => {});
 
 // Level 3 — TODO: daftarkan listener 'fetch'.
 //
@@ -49,3 +51,4 @@ async function networkFirst(request) {
 // (request.mode === 'navigate') yang gagal total (networkFirst
 // menolak/reject), kembalikan caches.match('/offline.html') sebagai
 // cadangan, alih-alih membiarkan halamannya gagal dimuat.
+self.addEventListener('fetch', () => {});
